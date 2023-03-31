@@ -8,9 +8,11 @@ import dev.kord.gateway.Intent
 import dev.kord.gateway.PrivilegedIntent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import io.github.cdimascio.dotenv.dotenv
 
 fun main() = runBlocking {
-    val kord = Kord(System.getenv("TOKEN"))
+    val dotenv = dotenv()
+    val kord = Kord(dotenv["TOKEN"])
     val pingPong = ReactionEmoji.Unicode("\uD83C\uDFD3")
 
     kord.on<MessageCreateEvent> {
@@ -20,8 +22,6 @@ fun main() = runBlocking {
         response.addReaction(pingPong)
 
         delay(5000)
-        message.delete()
-        response.delete()
     }
 
     kord.login {
