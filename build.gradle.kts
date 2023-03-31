@@ -1,25 +1,16 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("jvm") version "1.8.0"
+    alias(libs.plugins.kotlin.jvm)
 }
-
-group = "bot.procyon"
-version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
 dependencies {
-    testImplementation(kotlin("test"))
-    implementation("dev.kord:kord-core:0.8.1")
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
+    implementation(libs.kord.core)
 }

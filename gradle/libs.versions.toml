@@ -1,0 +1,9 @@
+[versions]
+kotlin = "1.8.10"
+kord = "0.8.1"
+
+[libraries]
+kord-core = { module = "dev.kord:kord-core", version.ref = "kord" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
