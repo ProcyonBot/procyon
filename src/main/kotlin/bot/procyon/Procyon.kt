@@ -38,7 +38,7 @@ private class Procyon : KoinComponent {
 
     suspend fun run() = runBlocking {
         val commands = Command::class.sealedSubclasses.map {
-            it::constructors.get().single().call(kord)
+            it::constructors.get().single().call()
         }
 
         kord.on<ReadyEvent> {
@@ -59,8 +59,6 @@ private class Procyon : KoinComponent {
 
                 try {
                     cmd.execute(message, emptyList())
-
-                    // badabinga
                     kordLogger.info { "Executed command ${cmd.name} as $cmdStr." }
                 } catch (e: Exception) {
                     kordLogger.error(e) { "Error executing command ${cmd.name}." }
