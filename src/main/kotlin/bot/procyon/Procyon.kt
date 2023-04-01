@@ -13,13 +13,11 @@ import io.github.cdimascio.dotenv.dotenv
 fun main() = runBlocking {
     val dotenv = dotenv()
     val kord = Kord(dotenv["TOKEN"])
-    val pingPong = ReactionEmoji.Unicode("\uD83C\uDFD3")
 
     kord.on<MessageCreateEvent> {
         if (message.content != "!ping") return@on
 
         val response = message.channel.createMessage("Pong!")
-        response.addReaction(pingPong)
 
         delay(5000)
     }
