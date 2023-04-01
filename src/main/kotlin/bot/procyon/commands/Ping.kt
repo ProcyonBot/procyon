@@ -1,9 +1,23 @@
 package bot.procyon.commands
 
-class Ping {
-    val name = "ping"
-    fun execute() {
+import dev.kord.common.Color
+import dev.kord.core.behavior.channel.createMessage
+import dev.kord.core.entity.Message
+import dev.kord.rest.builder.message.create.embed
+import kotlin.math.abs
 
+class Ping : Command("ping") {
+    override suspend fun execute(message: Message, args: List<String>?) {
+        val latency = System.currentTimeMillis() - message.timestamp.toEpochMilliseconds()
+        val pingEmbedColor = calculateColor(latency.toFloat())
+
+        message.channel.createMessage {
+            embed {
+                title = "Ping!"
+                description = "Took $latency ms."
+                color = pingEmbedColor
+            }
+        }
     }
 }
 
