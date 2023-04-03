@@ -18,6 +18,6 @@ sealed class Command(
 
     abstract suspend fun execute(
         message: Message,
-        args: List<String>? = emptyList()
+        args: List<String?> = emptyList()
     ) // to be overridden with `override fun`
 }
