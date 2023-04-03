@@ -4,13 +4,13 @@ import dev.kord.core.Kord
 import dev.kord.core.entity.Message
 import kotlin.properties.Delegates
 
-sealed class Command(
-    val name: String,
-    val description: String = "No description provided.",
-    val aliases: List<String> = emptyList(),
-    val enabled: Boolean = true,
-    val hasArgs: Boolean = true
-) {
+sealed class Command {
+    abstract val name: String
+    open val description: String = "No description provided."
+    open val aliases: List<String> = emptyList()
+    open val enabled: Boolean = true
+    open val hasArgs: Boolean = false
+
     private val kord: Kord by Delegates.notNull()
 
     // series of checks

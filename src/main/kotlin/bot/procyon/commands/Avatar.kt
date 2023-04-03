@@ -5,7 +5,9 @@ import dev.kord.core.behavior.reply
 import dev.kord.core.entity.Message
 import dev.kord.rest.builder.message.create.embed
 
-class Avatar : Command("avatar") {
+class Avatar : Command() {
+    override val name = "avatar"
+
     override suspend fun execute(message: Message, args: List<String?>) {
         val avatar = (message.getAuthorAsMemberOrNull() ?: message.author!!).displayAvatar()
 

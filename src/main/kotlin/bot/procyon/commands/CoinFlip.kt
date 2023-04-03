@@ -1,20 +1,19 @@
 package bot.procyon.commands
 
-import dev.kord.core.behavior.channel.createMessage
+import dev.kord.core.behavior.channel.createEmbed
 import dev.kord.core.entity.Message
-import dev.kord.rest.builder.message.create.embed
 
-class CoinFlip : Command(
-    name = "coinflip",
-    aliases = listOf("coin", "flip"),
-) {
-    private val chances = listOf("Heads", "Tails")
+class CoinFlip : Command() {
+    override val name = "coinflip"
+    override val aliases = listOf("coin", "flip")
 
     override suspend fun execute(message: Message, args: List<String?>) {
-        message.channel.createMessage {
-            embed {
-                title = "Flipped a coin and got ${chances.random()}!"
-            }
+        message.channel.createEmbed {
+            title = "Flipped a coin and got ${chances.random()}!"
         }
+    }
+
+    private companion object {
+        private val chances = listOf("Heads", "Tails")
     }
 }
