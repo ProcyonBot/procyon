@@ -49,7 +49,7 @@ private class Procyon : KoinComponent {
             launch { // Should allow for multiple commands to be executed at once
                 if (!message.content.startsWith(PREFIX)) return@launch
 
-                val cmdStr = message.content.drop(1).substringBefore(" ").lowercase()
+                val cmdStr = message.content.drop(PREFIX.length).substringBefore(" ").lowercase()
 
                 val cmd = commands.find {
                     it.name == cmdStr || it.aliases.contains(cmdStr)
