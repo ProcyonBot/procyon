@@ -2,18 +2,14 @@ package bot.procyon
 
 import bot.procyon.commands.Command
 import bot.procyon.di.botModule
-import bot.procyon.util.ProcyonChecksException
-import bot.procyon.util.ProcyonDisabledException
-import bot.procyon.util.ProcyonNeedsArgsException
+import bot.procyon.util.*
 import dev.kord.core.Kord
-import dev.kord.core.behavior.channel.createMessage
 import dev.kord.core.event.gateway.ReadyEvent
 import dev.kord.core.event.message.MessageCreateEvent
 import dev.kord.core.kordLogger
 import dev.kord.core.on
 import dev.kord.gateway.Intent
 import dev.kord.gateway.PrivilegedIntent
-import dev.kord.rest.builder.message.create.embed
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -65,16 +61,20 @@ private class Procyon : KoinComponent {
                     it.name == cmdStr || it.aliases.contains(cmdStr)
                 } ?: return@launch
 
-                if (!cmd.enabled) {
-                    // ProcyonDisabledException(cmdStr)
-                    return@launch
+
+                val commandFailException: Exception? = if (!cmd.enabled) {
+                    ProcyonDisabledException(cmdStr)
                 } else if (!cmd.check()) {
-                    // ProcyonChecksException(cmdStr)
-                    return@launch
+                    ProcyonChecksException(cmdStr)
                 } else if (cmd.hasArgs && args.isEmpty()) {
-                    // ProcyonNeedsArgsException(cmdStr)
-                    return@launch
+                    ProcyonNeedsArgsException(cmdStr)
+                } else {
+                    null
                 }
+                displayExceptionEmbed(commandFailException, message.channel)
+                if (commandFailException != null) return@launch
+
+
 
                 try {
                     cmd.execute(message, args)
