@@ -10,7 +10,7 @@ class CoinFlip : Command(
 ) {
     private val chances = listOf("Heads", "Tails")
 
-    override suspend fun execute(message: Message, args: List<String>?) {
+    override suspend fun execute(message: Message, args: List<String?>) {
         message.channel.createMessage {
             embed {
                 title = "Flipped a coin and got ${chances.random()}!"
