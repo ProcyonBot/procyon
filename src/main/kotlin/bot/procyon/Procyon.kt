@@ -49,7 +49,12 @@ private class Procyon : KoinComponent {
             launch { // Should allow for multiple commands to be executed at once
                 if (!message.content.startsWith(PREFIX)) return@launch
 
-                val cmdStr = message.content.drop(PREFIX.length).substringBefore(" ").lowercase()
+                val fullString = message.content.drop(PREFIX.length).lowercase()
+
+                val cmdStr = fullString.substringBefore(" ")
+                val args = fullString.substringAfter(" ", "").split(" ")
+                println(cmdStr)
+                println(args.joinToString(" "))
 
                 val cmd = commands.find {
                     it.name == cmdStr || it.aliases.contains(cmdStr)
@@ -58,7 +63,7 @@ private class Procyon : KoinComponent {
                 if (!cmd.check() || !cmd.enabled) return@launch
 
                 try {
-                    cmd.execute(message, emptyList())
+                    cmd.execute(message, args)
                     kordLogger.info { "Executed command ${cmd.name} as $cmdStr." }
                 } catch (e: Exception) {
                     kordLogger.error(e) { "Error executing command ${cmd.name}." }
