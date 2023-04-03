@@ -4,7 +4,7 @@ import dev.kord.core.behavior.channel.createMessage
 import dev.kord.core.entity.Message
 import dev.kord.rest.builder.message.create.embed
 
-class EightBall : Command("8ball") {
+class EightBall : Command("8ball", hasArgs = true) {
     private val answers =
         listOf("It is certain", "It is decidedly so", "Without a doubt",
             "Yes, definitely", "You may rely on it", "As I see it, yes",
