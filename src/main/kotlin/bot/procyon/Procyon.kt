@@ -2,13 +2,18 @@ package bot.procyon
 
 import bot.procyon.commands.Command
 import bot.procyon.di.botModule
+import bot.procyon.util.ProcyonChecksException
+import bot.procyon.util.ProcyonDisabledException
+import bot.procyon.util.ProcyonNeedsArgsException
 import dev.kord.core.Kord
+import dev.kord.core.behavior.channel.createMessage
 import dev.kord.core.event.gateway.ReadyEvent
 import dev.kord.core.event.message.MessageCreateEvent
 import dev.kord.core.kordLogger
 import dev.kord.core.on
 import dev.kord.gateway.Intent
 import dev.kord.gateway.PrivilegedIntent
+import dev.kord.rest.builder.message.create.embed
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -52,21 +57,31 @@ private class Procyon : KoinComponent {
                 val fullString = message.content.drop(PREFIX.length).lowercase()
 
                 val cmdStr = fullString.substringBefore(" ")
-                val args = fullString.substringAfter(" ", "").split(" ")
-                println(cmdStr)
-                println(args.joinToString(" "))
+                val args   = fullString.substringAfter(" ", "")
+                    .split(" ")
+                    .filter { it.isNotEmpty() }
 
                 val cmd = commands.find {
                     it.name == cmdStr || it.aliases.contains(cmdStr)
                 } ?: return@launch
 
-                if (!cmd.check() || !cmd.enabled) return@launch
+                if (!cmd.enabled) {
+                    // ProcyonDisabledException(cmdStr)
+                    return@launch
+                } else if (!cmd.check()) {
+                    // ProcyonChecksException(cmdStr)
+                    return@launch
+                } else if (cmd.hasArgs && args.isEmpty()) {
+                    // ProcyonNeedsArgsException(cmdStr)
+                    return@launch
+                }
 
                 try {
                     cmd.execute(message, args)
                     kordLogger.info { "Executed command ${cmd.name} as $cmdStr." }
                 } catch (e: Exception) {
                     kordLogger.error(e) { "Error executing command ${cmd.name}." }
+                    message.channel.createMessage("Error: ${e.toString()}")
                 }
             }
         }
