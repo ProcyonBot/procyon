@@ -7,12 +7,15 @@ import dev.kord.rest.builder.message.create.embed
 
 class Avatar : Command() {
     override val name = "avatar"
+    override val aliases = listOf("a")
 
     override suspend fun execute(message: Message, args: List<String?>) {
-        val avatar = (message.getAuthorAsMemberOrNull() ?: message.author!!).displayAvatar()
+        val member = message.getAuthorAsMemberOrNull() ?: message.author!!
+        val avatar = member.displayAvatar()
 
         message.reply {
             embed {
+                title = "Avatar of ${member.username}"
                 image = avatar.url
             }
         }
