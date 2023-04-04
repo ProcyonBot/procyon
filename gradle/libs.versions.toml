@@ -1,6 +1,6 @@
 [versions]
-kotlin = "1.8.10"
-kord = "0.8.1"
+kotlin = "1.8.20"
+kord = "0.8.2"
 koin = "3.4.0"
 
 [libraries]
