@@ -1,22 +1,29 @@
 package bot.procyon.di
 
+import bot.procyon.util.ProcyonConfig
+import com.charleskorn.kaml.Yaml
 import dev.kord.core.Kord
-import io.github.cdimascio.dotenv.Dotenv
-import io.github.cdimascio.dotenv.dotenv
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.decodeFromString
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
+import kotlin.io.path.Path
+import kotlin.io.path.notExists
+import kotlin.io.path.readText
 
 val botModule = module {
-    fun provideDotenv() = dotenv()
+    fun provideConfig(): ProcyonConfig {
+        val path = Path("config.yml")
 
-    fun provideToken(dotenv: Dotenv) = dotenv["TOKEN"]
+        if (path.notExists()) error("Config file not found!")
 
-    fun provideKord(token: String): Kord = runBlocking {
-        Kord(token)
+        return Yaml.default.decodeFromString(path.readText())
     }
 
-    singleOf(::provideDotenv)
-    singleOf(::provideToken)
+    fun provideKord(config: ProcyonConfig): Kord = runBlocking {
+        Kord(config.token)
+    }
+
+    singleOf(::provideConfig)
     singleOf(::provideKord)
 }

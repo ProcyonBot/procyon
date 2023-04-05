@@ -1,6 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 repositories {
@@ -13,10 +14,10 @@ kotlin {
 
 dependencies {
     implementation(libs.kord.core)
-    implementation(libs.dotenv.kotlin)
     implementation(libs.logback.classic)
+    implementation(libs.kaml)
 
-    implementation(libs.koin.core)
-    implementation(libs.koin.core.coroutines)
-    implementation(kotlin("reflect"))
+    implementation(libs.bundles.koin)
+
+    implementation(libs.kotlin.reflect)
 }

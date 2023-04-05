@@ -1,0 +1,6 @@
+token: "BOT TOKEN"
+prefix: "BOT PREFIX"
+superusers:
+    - "USER ID"
+    - "USER ID"
+    - "USER ID"
