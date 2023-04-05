@@ -14,7 +14,7 @@ kotlin {
 dependencies {
     implementation(libs.kord.core)
     implementation(libs.dotenv.kotlin)
-    implementation(libs.sl4fj.simple)
+    implementation(libs.logback.classic)
 
     implementation(libs.koin.core)
     implementation(libs.koin.core.coroutines)

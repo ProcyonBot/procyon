@@ -5,8 +5,8 @@ koin = "3.4.0"
 
 [libraries]
 kord-core = { module = "dev.kord:kord-core", version.ref = "kord" }
-sl4fj-simple = "org.slf4j:slf4j-simple:2.0.7"
 dotenv-kotlin = "io.github.cdimascio:dotenv-kotlin:6.4.1"
+logback-classic = "ch.qos.logback:logback-classic:1.4.5"
 
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-core-coroutines = { module = "io.insert-koin:koin-core-coroutines", version.ref = "koin" }
