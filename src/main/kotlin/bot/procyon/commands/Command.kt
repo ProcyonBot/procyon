@@ -2,16 +2,17 @@ package bot.procyon.commands
 
 import dev.kord.core.Kord
 import dev.kord.core.entity.Message
-import kotlin.properties.Delegates
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-sealed class Command {
+sealed class Command : KoinComponent {
     abstract val name: String
     open val description: String = "No description provided."
     open val aliases: List<String> = emptyList()
     open val enabled: Boolean = true
     open val hasArgs: Boolean = false
 
-    private val kord: Kord by Delegates.notNull()
+    protected val kord: Kord by inject()
 
     // series of checks
     open suspend fun check(): Boolean = true
