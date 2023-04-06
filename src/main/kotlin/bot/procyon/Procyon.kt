@@ -2,10 +2,7 @@ package bot.procyon
 
 import bot.procyon.commands.Command
 import bot.procyon.di.botModule
-import bot.procyon.util.ProcyonChecksException
-import bot.procyon.util.ProcyonDisabledException
-import bot.procyon.util.ProcyonNeedsArgsException
-import bot.procyon.util.displayExceptionEmbed
+import bot.procyon.util.*
 import dev.kord.core.Kord
 import dev.kord.core.event.gateway.ReadyEvent
 import dev.kord.core.event.message.MessageCreateEvent
@@ -22,8 +19,6 @@ import org.koin.core.context.GlobalContext.startKoin
 import org.koin.core.extension.coroutinesEngine
 import org.koin.environmentProperties
 
-private const val PREFIX = "!"
-
 @OptIn(KoinExperimentalAPI::class)
 private fun main() {
     val application = startKoin {
@@ -39,6 +34,7 @@ private fun main() {
 
 private class Procyon : KoinComponent {
     private val kord: Kord by inject()
+    private val config: ProcyonConfig by inject()
 
     suspend fun run() = runBlocking {
         val commands = Command::class.sealedSubclasses.map {
@@ -51,10 +47,10 @@ private class Procyon : KoinComponent {
 
         kord.on<MessageCreateEvent> {
             launch { // Should allow for multiple commands to be executed at once
-                if (!message.content.startsWith(PREFIX)) return@launch
+                if (!message.content.startsWith(config.prefix)) return@launch
 
                 // NOTE: Converting to lowercase effects args, which might be bad if you want to use case-sensitive args
-                val fullString = message.content.drop(PREFIX.length).lowercase()
+                val fullString = message.content.drop(config.prefix.length).lowercase()
 
                 val cmdStr = fullString.substringBefore(" ")
                 val args   = fullString.substringAfter(" ", "")
