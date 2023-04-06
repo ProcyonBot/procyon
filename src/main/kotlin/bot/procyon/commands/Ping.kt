@@ -28,8 +28,11 @@ fun calculateColor(ratio: Float): Color {
     val redStep = diff / ratio
     val greenStep = (-diff) / ratio
 
-    val redFinal = abs(high - (redStep * diff))
-    val greenFinal = abs(low - (greenStep * diff))
+    var redFinal = abs(high - (redStep * diff))
+    var greenFinal = abs(low - (greenStep * diff))
+
+    if (greenFinal > 255) greenFinal = 255f
+    if (redFinal   > 255) redFinal   = 255f
 
     return Color(redFinal.toInt(), greenFinal.toInt(), 48)
 }
