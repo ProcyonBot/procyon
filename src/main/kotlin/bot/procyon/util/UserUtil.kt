@@ -18,12 +18,12 @@ suspend fun getUserOrNull(string: String?, kord: Kord): User? {
         parsedId = Snowflake(string)
     } catch (e: Exception) {
         if (string.startsWith("<@")) {
-            parsedId = Snowflake(
-                string.replace("<", "")
-                    .replace(">", "")
-                    .replace("@", "")
-                    .replace("!", "")
-            )
+            var parsingString = string.replace("<", "")
+                .replace(">", "")
+                .replace("@", "")
+                .replace("!", "")
+            if (parsingString.isEmpty()) parsingString = "0"
+            parsedId = Snowflake(parsingString)
         }
     }
     return UserBehavior(parsedId, kord).asUserOrNull()
