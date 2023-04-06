@@ -78,7 +78,7 @@ private class Procyon : KoinComponent {
                     kordLogger.info { "Executed command ${cmd.name} as $cmdStr." }
                 } catch (e: Exception) {
                     kordLogger.error(e) { "Error executing command ${cmd.name}." }
-                    message.channel.createMessage("Error: $e")
+                    message.channel.displayExceptionEmbed(e)
                 }
             }
         }
