@@ -1,5 +1,6 @@
 package bot.procyon.commands
 
+import bot.procyon.util.ProcyonConfig
 import dev.kord.core.Kord
 import dev.kord.core.entity.Message
 import org.koin.core.component.KoinComponent
@@ -13,6 +14,7 @@ sealed class Command : KoinComponent {
     open val hasArgs: Boolean = false
 
     protected val kord: Kord by inject()
+    protected val config: ProcyonConfig by inject()
 
     // series of checks
     open suspend fun check(): Boolean = true
