@@ -16,6 +16,7 @@ sealed class Command : KoinComponent {
 
     protected val kord: Kord by inject()
     protected val config: ProcyonConfig by inject()
+    protected val commands: List<Command> by inject()
 
     // series of checks
     open suspend fun check(): Boolean = true
