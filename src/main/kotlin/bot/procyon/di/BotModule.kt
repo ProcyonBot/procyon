@@ -1,5 +1,6 @@
 package bot.procyon.di
 
+import bot.procyon.commands.Command
 import bot.procyon.util.ProcyonConfig
 import com.charleskorn.kaml.Yaml
 import dev.kord.core.Kord
@@ -24,6 +25,13 @@ val botModule = module {
         Kord(config.token)
     }
 
+    fun provideCommands(): List<Command> {
+        return Command::class.sealedSubclasses.map {
+            it::constructors.get().single().call()
+        }
+    }
+
     singleOf(::provideConfig)
     singleOf(::provideKord)
+    singleOf(::provideCommands)
 }
