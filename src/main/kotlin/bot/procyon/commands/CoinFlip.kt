@@ -6,6 +6,7 @@ import dev.kord.core.entity.Message
 class CoinFlip : Command() {
     override val name = "coinflip"
     override val aliases = listOf("coin", "flip")
+    override val description = "Flip a coin."
 
     override suspend fun execute(message: Message, args: List<String?>) {
         message.channel.createEmbed {

@@ -12,6 +12,7 @@ fun diceAliases(sides: Int): List<String> = listOf(sides.toString(), "d${sides.t
 class DiceRoll : Command() {
     override val name = "diceroll"
     override val aliases = listOf("roll", "dice")
+    override val description = "Roll a dice! Currently supports: d6, d8."
 
     override suspend fun execute(message: Message, args: List<String?>) {
         val type = when (args.firstOrNull()) {

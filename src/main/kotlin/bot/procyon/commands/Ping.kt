@@ -7,6 +7,7 @@ import kotlin.math.abs
 
 class Ping : Command() {
     override val name = "ping"
+    override val description = "Ping!"
 
     override suspend fun execute(message: Message, args: List<String?>) {
         val latency = System.currentTimeMillis() - message.timestamp.toEpochMilliseconds()
