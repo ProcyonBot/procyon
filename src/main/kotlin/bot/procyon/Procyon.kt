@@ -35,11 +35,10 @@ private fun main() {
 private class Procyon : KoinComponent {
     private val kord: Kord by inject()
     private val config: ProcyonConfig by inject()
+    private val commandsInjected: List<Command> by inject()
 
     suspend fun run() = runBlocking {
-        val commands = Command::class.sealedSubclasses.map {
-            it::constructors.get().single().call()
-        }
+        val commands = commandsInjected
 
         kord.on<ReadyEvent> {
             kordLogger.info("Logged in as ${kord.getSelf().username}!")
