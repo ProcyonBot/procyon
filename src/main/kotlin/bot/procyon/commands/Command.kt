@@ -9,6 +9,7 @@ import org.koin.core.component.inject
 sealed class Command : KoinComponent {
     abstract val name: String
     open val description: String = "No description provided."
+    open val usage: String = "$name <args>"
     open val aliases: List<String> = emptyList()
     open val enabled: Boolean = true
     open val hasArgs: Boolean = false
