@@ -17,7 +17,7 @@ class Help : Command() {
         message.reply {
             embed {
                 title = "Commands"
-                color = EmbedColor.DEFAULT.value
+                color = EmbedColor.INFO.value
 
                 commands.forEach {
                     field {
