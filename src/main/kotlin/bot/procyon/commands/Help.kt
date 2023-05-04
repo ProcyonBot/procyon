@@ -33,7 +33,20 @@ class Help : Command() {
                 }
             }
         } else {
-            val command = commands.first { it.name == args[0] || it.aliases.contains(args[0]) }
+            val command = try {
+                commands.first { it.name == args[0] || it.aliases.contains(args[0]) }
+            } catch (_: NoSuchElementException) {
+                message.reply {
+                    embed {
+                        title = "No such command."
+                        description = "Command ${args[0]!!.take(30)} does not exist."
+                        color = EmbedColor.ERROR.value
+                    }
+                }
+                return@execute
+            }
+
+
             message.reply {
                 embed {
                     title = command.name
