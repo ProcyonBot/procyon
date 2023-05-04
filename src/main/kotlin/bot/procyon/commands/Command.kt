@@ -19,7 +19,7 @@ sealed class Command : KoinComponent {
     protected val commands: List<Command> by inject()
 
     // series of checks
-    open suspend fun check(): Boolean = true
+    open suspend fun check(message: Message): Boolean = true
 
     abstract suspend fun execute(
         message: Message,
