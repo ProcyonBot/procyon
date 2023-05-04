@@ -37,7 +37,7 @@ class UserInfo : Command() {
                 title = person.tag
                 color = person.accentColor ?: EmbedColor.SUCCESS.value
                 thumbnail {
-                    url = person.displayAvatar().url
+                    url = person.displayAvatar().cdnUrl.toUrl()
                 }
                 field {
                     name = "Joined guild at"

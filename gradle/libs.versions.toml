@@ -1,11 +1,11 @@
 [versions]
-kotlin = "1.8.20"
-kord = "0.8.2"
+kotlin = "1.8.21"
+kord = "0.9.0"
 koin = "3.4.0"
 
 [libraries]
 kord-core = { module = "dev.kord:kord-core", version.ref = "kord" }
-logback-classic = "ch.qos.logback:logback-classic:1.4.5"
+logback-classic = "ch.qos.logback:logback-classic:1.4.7"
 kaml = "com.charleskorn.kaml:kaml:0.53.0"
 
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }

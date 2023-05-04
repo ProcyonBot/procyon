@@ -18,7 +18,7 @@ class Avatar : Command() {
         message.reply {
             embed {
                 title = "Avatar of ${member.username}"
-                image = avatar.url
+                image = avatar.cdnUrl.toUrl()
             }
         }
     }
