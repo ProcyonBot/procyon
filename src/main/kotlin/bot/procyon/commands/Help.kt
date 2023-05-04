@@ -43,7 +43,7 @@ class Help : Command() {
                     if (command.usage.isNotBlank()) {
                         field {
                             name = "Usage"
-                            value = "${command.name.toString()} ${command.usage.toString()}" // ?? Else we get bot.procyon.commands.EightBall@27b45ea.name
+                            value = "${command.name} ${command.usage}" // ?? Else we get bot.procyon.commands.EightBall@27b45ea.name
                         }
                         footer {
                             text = "<arg> is required, [arg] is optional."

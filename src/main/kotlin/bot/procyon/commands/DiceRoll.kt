@@ -7,7 +7,7 @@ import dev.kord.rest.builder.message.create.embed
 import io.ktor.client.request.forms.*
 import io.ktor.utils.io.jvm.javaio.*
 
-fun diceAliases(sides: Int): List<String> = listOf(sides.toString(), "d${sides.toString()}")
+fun diceAliases(sides: Int): List<String> = listOf(sides.toString(), "d$sides")
 
 class DiceRoll : Command() {
     override val name = "diceroll"
