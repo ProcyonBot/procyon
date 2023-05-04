@@ -13,6 +13,7 @@ import dev.kord.rest.builder.message.create.embed
 class UserInfo : Command() {
     override val name = "userinfo"
     override val description = "View information about a user."
+    override val usage = "[user]"
 
     override suspend fun execute(message: Message, args: List<String?>) {
         var person: Member = message.getAuthorAsMemberOrThrow()

@@ -9,6 +9,7 @@ const val RESULTS_PER_PAGE = 9
 class Help : Command() {
     override val name = "help"
     override val description = "View available commands and information about them."
+    override val usage = "[command]"
 
     override suspend fun execute(message: Message, args: List<String?>) {
         // todo: pagination of some kind
@@ -32,17 +33,20 @@ class Help : Command() {
                 }
             }
         } else {
-            val command = commands.first { it.name == args[0] }
+            val command = commands.first { it.name == args[0] || it.aliases.contains(args[0]) }
             message.reply {
                 embed {
                     title = command.name
                     description = command.description
                     color = EmbedColor.INFO.value
 
-                    if (command.hasArgs) {
+                    if (command.usage.isNotBlank()) {
                         field {
                             name = "Usage"
                             value = "${command.name.toString()} ${command.usage.toString()}" // ?? Else we get bot.procyon.commands.EightBall@27b45ea.name
+                        }
+                        footer {
+                            text = "<arg> is required, [arg] is optional."
                         }
                     }
 

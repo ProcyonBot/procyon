@@ -9,6 +9,7 @@ class Avatar : Command() {
     override val name = "avatar"
     override val aliases = listOf("a")
     override val description = "View your own, or someone else's, avatar."
+    override val usage = "[user]"
 
     override suspend fun execute(message: Message, args: List<String?>) {
         val member = message.getAuthorAsMemberOrNull() ?: message.author!!

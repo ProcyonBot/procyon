@@ -13,6 +13,7 @@ class DiceRoll : Command() {
     override val name = "diceroll"
     override val aliases = listOf("roll", "dice")
     override val description = "Roll a dice! Currently supports: d6, d8."
+    override val usage = "[type]"
 
     override suspend fun execute(message: Message, args: List<String?>) {
         val type = when (args.firstOrNull()) {
