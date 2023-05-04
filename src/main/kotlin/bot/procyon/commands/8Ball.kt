@@ -14,7 +14,7 @@ class EightBall : Command() {
             title = "$EIGHT_BALL Magic 8 Ball $EIGHT_BALL"
             field {
                 name = "Question"
-                value = args.joinToString(" ")
+                value = args.joinToString(" ").take(200)
             }
             field {
                 name = "Answer"
