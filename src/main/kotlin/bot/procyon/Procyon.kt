@@ -62,7 +62,7 @@ private class Procyon : KoinComponent {
 
                 val commandFailException = when {
                     !cmd.enabled -> ProcyonDisabledException(cmdStr)
-                    !cmd.check() -> ProcyonChecksException(cmdStr)
+                    !cmd.check(message) -> ProcyonChecksException(cmdStr)
                     cmd.hasArgs && args.isEmpty() -> ProcyonNeedsArgsException(cmdStr)
                     else -> null
                 }
