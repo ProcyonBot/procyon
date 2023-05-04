@@ -11,23 +11,46 @@ class Help : Command() {
     override val description = "View available commands and information about them."
 
     override suspend fun execute(message: Message, args: List<String?>) {
-        // todo: implement command specific help
         // todo: pagination of some kind
         var resultsThisPage = 0
+        if (args.firstOrNull().isNullOrBlank()) {
+            message.reply {
+                embed {
+                    title = "Commands"
+                    color = EmbedColor.INFO.value
 
-        message.reply {
-            embed {
-                title = "Commands"
-                color = EmbedColor.INFO.value
-
-                commands.forEach {
-                    if (resultsThisPage < RESULTS_PER_PAGE) {
-                        field {
-                            name = it.name
-                            value = it.description
-                            inline = true
+                    commands.forEach {
+                        if (resultsThisPage < RESULTS_PER_PAGE) {
+                            field {
+                                name = it.name
+                                value = it.description
+                                inline = true
+                            }
+                            resultsThisPage++
                         }
-                        resultsThisPage++
+                    }
+                }
+            }
+        } else {
+            val command = commands.first { it.name == args[0] }
+            message.reply {
+                embed {
+                    title = command.name
+                    description = command.description
+                    color = EmbedColor.INFO.value
+
+                    if (command.hasArgs) {
+                        field {
+                            name = "Usage"
+                            value = "${command.name.toString()} ${command.usage.toString()}" // ?? Else we get bot.procyon.commands.EightBall@27b45ea.name
+                        }
+                    }
+
+                    if (command.aliases.isNotEmpty()) {
+                        field {
+                            name = "Aliases"
+                            value = command.aliases.joinToString(", ")
+                        }
                     }
                 }
             }
