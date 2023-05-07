@@ -15,7 +15,8 @@ kotlin {
     target {
         compilations.all {
             kotlinOptions {
-                freeCompilerArgs += "-Xcontext-receivers"
+                freeCompilerArgs += "-Xcontext-receivers "
+                freeCompilerArgs += "-opt-in=org.komapper.annotation.KomapperExperimentalAssociation "
             }
         }
     }
