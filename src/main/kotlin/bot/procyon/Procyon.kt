@@ -18,6 +18,7 @@ import org.koin.core.component.inject
 import org.koin.core.context.GlobalContext.startKoin
 import org.koin.core.extension.coroutinesEngine
 import org.koin.environmentProperties
+import org.komapper.jdbc.JdbcDatabase
 
 @OptIn(KoinExperimentalAPI::class)
 private fun main() {
@@ -33,12 +34,15 @@ private fun main() {
 }
 
 private class Procyon : KoinComponent {
+    private val db = JdbcDatabase("jdbc:sqlite:data.db")
+
     private val kord: Kord by inject()
     private val config: ProcyonConfig by inject()
     private val commandsInjected: List<Command> by inject()
 
     suspend fun run() = runBlocking {
         val commands = commandsInjected
+
 
         kord.on<ReadyEvent> {
             kordLogger.info("Logged in as ${kord.getSelf().username}!")
