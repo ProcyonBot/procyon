@@ -26,7 +26,6 @@ dependencies {
     implementation(libs.kord.core)
     implementation(libs.logback.classic)
     implementation(libs.kaml)
-    implementation(libs.sqlite.jdbc)
 
     implementation(libs.bundles.koin)
 
@@ -36,6 +35,8 @@ dependencies {
         implementation(it)
         ksp(it)
     }
-    implementation("org.komapper:komapper-starter-jdbc")
     ksp("org.komapper:komapper-processor")
+
+    implementation(libs.komapper.starter.r2dbc)
+    implementation(libs.komapper.dialect.h2.r2dbc)
 }
