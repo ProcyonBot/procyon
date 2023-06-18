@@ -12,7 +12,7 @@ import org.komapper.annotation.KomapperTable
 data class User(
     @KomapperId
     val id:             Snowflake,
-    val balance:        Int,
+    val balance:        Double,
     val exp:            Int
 )
 

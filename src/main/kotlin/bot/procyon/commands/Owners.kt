@@ -2,6 +2,7 @@ package bot.procyon.commands
 
 import bot.procyon.util.EmbedColor
 import bot.procyon.util.getUserOrNull
+import bot.procyon.util.globalName
 import dev.kord.core.behavior.reply
 import dev.kord.core.entity.Message
 import dev.kord.rest.builder.message.create.embed
@@ -21,8 +22,8 @@ class Owners : Command() {
                 config.superusers.forEach {
                     val user = getUserOrNull(it.toString(), kord)!!
                     field {
-                        name = user.tag
-                        value = user.id.toString()
+                        name = user.globalName
+                        value = user.mention
                         inline = true
                     }
                 }

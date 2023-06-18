@@ -19,7 +19,7 @@ suspend fun R2dbcDatabase.getOrCreateUser(id: Snowflake): User {
     return runQuery { selectQuery }
         ?: this.runQuery {
             QueryDsl.insert(user).single(
-                User(id, 0, 0)
+                User(id, 0.00, 0)
             ).returning()
         }
 }
