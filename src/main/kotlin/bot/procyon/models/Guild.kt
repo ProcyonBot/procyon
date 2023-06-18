@@ -1,5 +1,6 @@
 package bot.procyon.models
 
+import dev.kord.common.entity.Snowflake
 import org.komapper.annotation.KomapperEntity
 import org.komapper.annotation.KomapperId
 import org.komapper.annotation.KomapperOneToMany
@@ -8,5 +9,5 @@ import org.komapper.annotation.KomapperOneToMany
 @KomapperOneToMany(targetEntity = User::class)
 data class Guild(
     @KomapperId
-    val id:     Long
+    val id:     Snowflake
 )
