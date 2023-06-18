@@ -2,6 +2,7 @@ package bot.procyon.util
 
 import dev.kord.core.behavior.reply
 import dev.kord.core.entity.Message
+import dev.kord.core.entity.User
 import dev.kord.rest.builder.message.EmbedBuilder
 import java.io.InputStream
 
@@ -12,3 +13,6 @@ inline fun embed(block: EmbedBuilder.() -> Unit) = EmbedBuilder().also(block)
 
 fun getResource(path: String): InputStream? =
     object {}.javaClass.getResourceAsStream(path)
+
+val User.globalName
+    get() = tag.replace("#0", "")

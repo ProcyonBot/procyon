@@ -81,6 +81,17 @@ private class Procyon : KoinComponent {
 
         kord.on<MessageCreateEvent> {
             launch { // Should allow for multiple commands to be executed at once
+
+                if (message.author == null) {
+                    return@launch
+                }
+                // Update user EXP.. TODO: is this okay?
+                val dbUser = database.getOrCreateUser(message.author!!.id)
+                val updatedUserQuery = QueryDsl.update(Meta.user).single(
+                    dbUser.copy(exp = dbUser.exp + 1)
+                )
+                database.runQuery(updatedUserQuery)
+
                 if (!message.content.startsWith(config.prefix)) return@launch
 
                 // NOTE: Converting to lowercase effects args, which might be bad if you want to use case-sensitive args
