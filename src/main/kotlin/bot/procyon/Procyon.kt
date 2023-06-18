@@ -82,6 +82,9 @@ private class Procyon : KoinComponent {
         kord.on<MessageCreateEvent> {
             launch { // Should allow for multiple commands to be executed at once
                 if (!message.content.startsWith(config.prefix)) return@launch
+                if (message.author == null) {
+                    return@launch
+                }
 
                 // NOTE: Converting to lowercase effects args, which might be bad if you want to use case-sensitive args
                 val fullString = message.content.drop(config.prefix.length).lowercase()
