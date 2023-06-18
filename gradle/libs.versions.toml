@@ -2,11 +2,16 @@
 kotlin = "1.8.21"
 kord = "0.9.0"
 koin = "3.4.0"
+komapper = "1.9.0"
 
 [libraries]
 kord-core = { module = "dev.kord:kord-core", version.ref = "kord" }
 logback-classic = "ch.qos.logback:logback-classic:1.4.7"
 kaml = "com.charleskorn.kaml:kaml:0.53.0"
+
+komapper-starter-r2dbc = { module = "org.komapper:komapper-starter-r2dbc", version.ref = "komapper" }
+komapper-dialect-h2-r2dbc = { module = "org.komapper:komapper-dialect-h2-r2dbc", version.ref = "komapper" }
+komapper-processor = { module = "org.komapper:komapper-processor", version.ref = "komapper" }
 
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-core-coroutines = { module = "io.insert-koin:koin-core-coroutines", version.ref = "koin" }
@@ -19,3 +24,4 @@ koin = [ "koin-core", "koin-core-coroutines" ]
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-symbol-processing = "com.google.devtools.ksp:1.8.21-1.0.11"

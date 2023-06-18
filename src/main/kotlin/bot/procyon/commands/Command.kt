@@ -5,6 +5,7 @@ import dev.kord.core.Kord
 import dev.kord.core.entity.Message
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.komapper.r2dbc.R2dbcDatabase
 
 sealed class Command : KoinComponent {
     abstract val name: String
@@ -17,6 +18,7 @@ sealed class Command : KoinComponent {
     protected val kord: Kord by inject()
     protected val config: ProcyonConfig by inject()
     protected val commands: List<Command> by inject()
+    protected val database: R2dbcDatabase by inject()
 
     // series of checks
     open suspend fun check(message: Message): Boolean = true
