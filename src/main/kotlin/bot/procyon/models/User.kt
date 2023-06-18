@@ -13,6 +13,6 @@ data class User(
     @KomapperId
     val id:             Snowflake,
     val balance:        Int,
-    val exp:            Float
+    val exp:            Int
 )
 
