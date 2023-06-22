@@ -9,10 +9,12 @@ const val RESULTS_PER_PAGE = 9
 class Help : Command() {
     override val name = "help"
     override val description = "View available commands and information about them."
-    override val usage = "[command]"
+    override val usage = "command?"
 
     override suspend fun execute(message: Message, args: List<String?>) {
         // todo: pagination of some kind
+        // how do we tell commands apart vs. page numbers? uh oh
+        // we've created a bit of a pickle
         var resultsThisPage = 0
         if (args.firstOrNull().isNullOrBlank()) {
             message.reply {
@@ -56,10 +58,10 @@ class Help : Command() {
                     if (command.usage.isNotBlank()) {
                         field {
                             name = "Usage"
-                            value = "${command.name} ${command.usage}" // ?? Else we get bot.procyon.commands.EightBall@27b45ea.name
+                            value = "`${command.name} ${command.usage}`" // ?? Else we get bot.procyon.commands.EightBall@27b45ea.name
                         }
                         footer {
-                            text = "<arg> is required, [arg] is optional."
+                            text = "Arguments marked with a ? are optional."
                         }
                     }
 

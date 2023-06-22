@@ -7,7 +7,7 @@ class EightBall : Command() {
     override val name = "8ball"
     override val hasArgs = true
     override val description = "Ask the Magic 8 Ball anything!"
-    override val usage = "<question>"
+    override val usage = "question"
 
     override suspend fun execute(message: Message, args: List<String?>) {
         message.channel.createEmbed {
