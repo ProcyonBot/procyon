@@ -7,6 +7,7 @@ enum class EmbedColor(val value: Color) {
     WARN(Color(226, 226, 12)),
     ERROR(Color(192, 48, 48)),
     INFO(Color(48, 48, 192)),
-    DEFAULT(Color(160, 160, 160))
+    DEFAULT(Color(160, 160, 160)),
+    PINK(Color(226, 160, 226)) // god damn it's PINK!!
 
 }
