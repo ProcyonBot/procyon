@@ -6,6 +6,7 @@ import dev.kord.core.entity.Message
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.komapper.r2dbc.R2dbcDatabase
+import kotlin.time.Duration
 
 sealed class Command : KoinComponent {
     abstract val name: String
@@ -14,6 +15,7 @@ sealed class Command : KoinComponent {
     open val aliases: List<String> = emptyList()
     open val enabled: Boolean = true
     open val hasArgs: Boolean = false
+    open val cooldown: Duration = Duration.ZERO
 
     protected val kord: Kord by inject()
     protected val config: ProcyonConfig by inject()

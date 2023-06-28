@@ -12,14 +12,16 @@ import java.text.NumberFormat
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.time.Duration.Companion.minutes
 
 class Guess : Command() {
     override val name = "guess"
     override val description = "Guess 1-100 for some simple, quick money."
     override val hasArgs = true
     override val usage = "number"
+    override val cooldown = 15.minutes
 
-    override suspend fun execute(message: Message, args: List<String?>) { // TODO: COOLDOWNS good GOD
+    override suspend fun execute(message: Message, args: List<String?>) {
         val guess = args[0]?.toBigIntegerOrNull()?.toFloat()?.let { max(min(it, 100F), 0F) } ?: throw Exception()
         val winning = (0..100).random().toFloat()
         val userWon = (guess == winning)

@@ -10,3 +10,6 @@ class ProcyonDisabledException(cmdName: String? = null, message: String? = "Comm
 
 class ProcyonChecksException(cmdName: String? = null, message: String? = "Command $cmdName failed checks", cause: Throwable? = null)
     : ProcyonCommandException(cmdName, message, cause)
+
+class ProcyonCooldownException(cmdName: String? = null, message: String? = "Command $cmdName is on cooldown", cause: Throwable? = null)
+    : ProcyonCommandException(cmdName, message, cause)
